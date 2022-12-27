@@ -6,7 +6,7 @@ Based on package [BluetoothSerial](https://github.com/rusel1989/react-native-blu
 Officialy this library supports React Native >= 0.25, it may run on older versions but no guarantees.
 
 ## Installation
-1. Install package via npm: `npm i -S react-native-bluetooth-serial`
+1. Install package via npm: `npm i -S react-native-bluetooth-serial-v2`
 2. Link libraries with: `rnpm link` or `react-native link` for React Native >= 0.27
 3. For android you also need to put following code to `AndroidManifest.xml`
 ```
@@ -16,27 +16,27 @@ Officialy this library supports React Native >= 0.25, it may run on older versio
 
 ## Manual installation
 #### iOS
-1. `npm i -S react-native-bluetooth-serial`
+1. `npm i -S react-native-bluetooth-serial-v2`
 2. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
-3. Go to `node_modules` ➜ `react-native-bluetooth-serial` and add `RCTBluetoothSerial.xcodeproj`
+3. Go to `node_modules` ➜ `react-native-bluetooth-serial-v2` and add `RCTBluetoothSerial.xcodeproj`
 4. In XCode, in the project navigator, select your project. Add `libRCTBluetoothSerial.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
 5. Click `RCTBluetoothSerial.xcodeproj` in the project navigator and go the `Build Settings` tab. Make sure 'All' is toggled on (instead of 'Basic'). In the `Search Paths` section, look for `Header Search Paths` and make sure it contains both `$(SRCROOT)/../../react-native/React` and `$(SRCROOT)/../../../React` - mark both as `recursive`.
 5. Run your project (`Cmd+R`)
 
 
 #### Android
-1. `npm i -S react-native-bluetooth-serial`
+1. `npm i -S react-native-bluetooth-serial-v2`
 2. Open up `android/app/src/main/java/[...]/MainActivity.java` or `MainApplication.java` for React Native >= 0.29
   - Add `import com.rusel.RCTBluetoothSerial.*;` to the imports at the top of the file
   - Add `new RCTBluetoothSerialPackage()` to the list returned by the `getPackages()` method
 3. Append the following lines to `android/settings.gradle`:
     ```
-    include ':react-native-bluetooth-serial'
-    project(':react-native-bluetooth-serial').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-bluetooth-serial/android')
+    include ':react-native-bluetooth-serial-v2'
+    project(':react-native-bluetooth-serial-v2').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-bluetooth-serial-v2/android')
     ```
 4. Insert the following lines inside the dependencies block in `android/app/build.gradle`:
     ```
-    compile project(':react-native-bluetooth-serial')
+    implementation project(':react-native-bluetooth-serial-v2')
     ```
 
 ## Example
@@ -66,6 +66,9 @@ Disable bluetooth currently in android only.
 
 ### isEnabled()
 Resolves to boolean value indicating current bluetooth state.
+
+### [android] requestEnable()
+Requet the user to start bluetooth.
 
 ### list()
 Resolves to array of available devices, devices are in following format:
