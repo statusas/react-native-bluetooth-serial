@@ -13,12 +13,10 @@ BluetoothSerial.on = (eventName, handler) => {
 }
 
 /**
- * Stop listening for event
- * @param  {String} eventName Name of event one of connectionSuccess, connectionLost, data, rawData
- * @param  {Function} handler Event handler
+ * Remove all event listeners
  */
-BluetoothSerial.removeListener = (eventName, handler) => {
-  DeviceEventEmitter.removeListener(eventName, handler)
+BluetoothSerial.removeAllListeners = () => {
+  DeviceEventEmitter.removeAllListeners()
 }
 
 /**
