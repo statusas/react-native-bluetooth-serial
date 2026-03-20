@@ -1,33 +1,28 @@
 const ReactNative = require('react-native')
 const { Buffer } = require('buffer')
 const { NativeModules, DeviceEventEmitter } = ReactNative
-const BluetoothSerial = NativeModules.BluetoothSerial
 
-/**
- * Listen for available events
- * @param  {String} eventName Name of event one of connectionSuccess, connectionLost, data, rawData
- * @param  {Function} handler Event handler
- */
+const BluetoothSerial =
+  NativeModules.BluetoothSerial ||
+  NativeModules.RCTBluetoothSerial
+
+if (!BluetoothSerial) {
+  throw new Error(
+    'react-native-bluetooth-serial-v2: native module not found. Tried NativeModules.BluetoothSerial and NativeModules.RCTBluetoothSerial.'
+  )
+}
+
 BluetoothSerial.on = (eventName, handler) => {
   DeviceEventEmitter.addListener(eventName, handler)
 }
 
-/**
- * Remove all event listeners
- */
 BluetoothSerial.removeAllListeners = () => {
   DeviceEventEmitter.removeAllListeners()
 }
 
-/**
- * Write data to device, you can pass string or buffer,
- * We must convert to base64 in RN there is no way to pass buffer directly
- * @param  {Buffer|String} data
- * @return {Promise<Boolean>}
- */
 BluetoothSerial.write = (data) => {
   if (typeof data === 'string') {
-    data = new Buffer(data)
+    data = Buffer.from(data)
   }
   return BluetoothSerial.writeToDevice(data.toString('base64'))
 }
